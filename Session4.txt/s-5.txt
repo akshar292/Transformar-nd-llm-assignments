@@ -1,0 +1,105 @@
+# SESSION 4 – PROMPT ENGINEERING BASICS
+
+## Task 1: Write a Prompt for an Instagram Bio
+
+**Prompt:**
+
+"Create a catchy and creative Instagram bio for a college student who loves cricket and music. Keep it short, stylish, and attractive. Use emojis, a little humor, and a cool attitude. Make it suitable for a personal Instagram profile and keep it within 150 characters."
+
+**Example Output:**
+
+🏏 Cricket lover | 🎧 Music addict  
+Living life one beat and one boundary at a time! ✨
+
+**Explanation:**
+
+This prompt is likely to give a good result because it clearly explains the user's interests and the desired style. It specifies the length, tone, and use of emojis. These details help the LLM generate a relevant and attractive Instagram bio.
+
+## Task 2: Improve the Vague Prompt "Suggest Some Food"
+
+**Bad Prompt:**
+
+"Suggest some food."
+
+**Improved Prompt:**
+
+"Suggest 10 affordable vegetarian dinner ideas for a college student living in a hostel in Ahmedabad, Gujarat. Include a mix of Gujarati, North Indian, and simple South Indian dishes. Focus on meals that are easy to prepare, require minimal cooking equipment, and cost less than ₹100 per serving. For each suggestion, provide the dish name, estimated cost, and a short explanation. Use a numbered list and simple English."
+
+**Explanation:**
+
+The improved prompt specifies the number of suggestions, food preference, meal type, location, budget, and cooking requirements. This helps the LLM provide more relevant, practical, and organized answers.
+
+## Task 3: Zero-Shot Prompting – Summarizing a Trending IPL Topic
+
+**Prompt Used:**
+
+"Summarize a currently trending topic related to the Indian Premier League (IPL) in exactly three sentences. Use recent and reliable information, explain why the topic is trending, and keep the language simple and easy to understand. If you do not have access to current information, clearly mention that limitation instead of inventing news."
+
+**Example Output:**
+
+The Indian Premier League (IPL) attracts attention through team performances, player selections, match results, and discussions about upcoming seasons. Fans often follow news about player auctions, team strategies, and changes to squad combinations. The most important trending topic can change quickly, so recent sports news should be checked to identify what is trending right now.
+
+**Explanation:**
+
+Zero-shot prompting means asking an LLM to perform a task without providing examples of the expected answer. In this task, the model is directly instructed to summarize an IPL topic in three sentences without being shown a sample summary.
+
+*Note: The output above is a general example, not a verified summary of the latest IPL trend.*
+
+## Task 4: Few-Shot Prompting – Funny Flipkart Product Reviews
+
+**Prompt:**
+
+"Write short, funny, one-line product reviews for Flipkart products. Follow the style of these examples:
+
+**Example 1:** Product: Alarm Clock  
+Review: 'Wakes me up daily, but still can't wake up my motivation!'
+
+**Example 2:** Product: Headphones  
+Review: 'Now I can ignore everyone professionally!'
+
+**Your Task:** Write one funny, creative, one-line review for a Bluetooth speaker. Keep it simple, humorous, and suitable for an online shopping review."
+
+**Example Output:**
+
+Product: Bluetooth Speaker  
+Review: "Small speaker, huge attitude—now even my neighbors know my playlist! 😂"
+
+**Explanation:**
+
+Few-shot prompting means providing a small number of examples before asking the model to perform a task. The two examples demonstrate the desired humor, style, and length, helping the LLM generate a similar review for the Bluetooth speaker.
+
+## Task 5: Three Common Prompt-Writing Mistakes
+
+### Mistake 1: Being Too Vague
+
+**Bad Prompt:**  
+"Tell me about technology."
+
+**Better Prompt:**  
+"Explain three ways artificial intelligence is used in everyday life. Give one practical example for each use and write in simple English in about 150 words."
+
+**Explanation:** A specific prompt helps the model focus on the exact topic and produce a relevant answer.
+
+### Mistake 2: Not Specifying the Output Format
+
+**Bad Prompt:**  
+"Tell me about Python programming."
+
+**Better Prompt:**  
+"Explain five important features of Python programming in a numbered list. For each feature, provide a one-sentence explanation and one simple example."
+
+**Explanation:** Specifying the output format makes the answer more organized and easier to understand.
+
+### Mistake 3: Giving Too Little Context
+
+**Bad Prompt:**  
+"Make me a study plan."
+
+**Better Prompt:**  
+"Create a seven-day study plan for a college student who can study two hours daily. Include time for learning Python, practicing SQL, and revising previous topics. Present the plan in a table with daily tasks and goals."
+
+**Explanation:** Providing relevant background information and constraints helps the LLM create a more useful and personalized answer.
+
+## Conclusion
+
+Prompt engineering is the process of writing clear and effective instructions to get better results from an LLM. A good prompt includes the task, relevant context, constraints, and expected output format. Zero-shot prompting uses no examples, while few-shot prompting provides examples to guide the model's response.

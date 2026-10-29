@@ -1,0 +1,260 @@
+### Task 1: Install Streamlit
+
+Open PowerShell or Command Prompt and execute:
+
+```bash
+pip install streamlit requests
+```
+
+Streamlit is a Python library used to build interactive web applications. The `requests` library is used to send HTTP requests to an AI API.
+
+### Task 2: Create the Streamlit UI
+
+Create a Python file named `insta_caption_generator.py` and add the following code:
+
+```python
+import streamlit as st
+
+st.title("Welcome to Insta Caption Generator!")
+
+description = st.text_input("Describe your photo")
+generate = st.button("Generate Caption")
+
+if generate:
+    st.write("Your Description:", description)
+```
+
+This code displays the welcome message, a text input field, and the Generate Caption button.
+
+### Task 3: Display the User's Input
+
+When the user enters a photo description and clicks the button, the app displays the input below the button with the label "Your Description:".
+
+**Example Output:**
+
+```text
+Welcome to Insta Caption Generator!
+
+Describe your photo:
+A beautiful sunset at the beach
+
+[Generate Caption]
+
+Your Description: A beautiful sunset at the beach
+```
+
+### Task 4: Connect the App to the OpenAI API
+
+Replace the previous code with the following complete application. It connects to the OpenAI API and generates an Instagram caption from the user's description.
+
+**File: `insta_caption_generator.py`**
+
+```python
+import os
+import requests
+import streamlit as st
+
+st.set_page_config(
+    page_title="Insta Caption Generator",
+    page_icon="📸"
+)
+
+st.title("Welcome to Insta Caption Generator!")
+st.write("Generate creative Instagram captions using AI.")
+
+# Get the API key from the environment
+API_KEY = os.getenv("OPENAI_API_KEY")
+
+description = st.text_input("Describe your photo")
+
+if st.button("Generate Caption"):
+    if not description.strip():
+        st.warning("Please describe your photo first.")
+
+    elif not API_KEY:
+        st.error("Please configure your OPENAI_API_KEY.")
+
+    else:
+        with st.spinner("Generating your caption..."):
+            try:
+                response = requests.post(
+                    "https://api.openai.com/v1/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {API_KEY}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "model": "gpt-4o-mini",
+                        "messages": [
+                            {
+                                "role": "system",
+                                "content": (
+                                    "Write one catchy Instagram caption "
+                                    "with suitable emojis and hashtags."
+                                )
+                            },
+                            {
+                                "role": "user",
+                                "content": description
+                            }
+                        ],
+                        "max_tokens": 120
+                    },
+                    timeout=30
+                )
+
+                response.raise_for_status()
+                result = response.json()
+                caption = result["choices"][0]["message"]["content"]
+
+                st.write("Your Description:", description)
+                st.subheader("Your AI-Generated Caption")
+                st.write(caption)
+
+            except requests.RequestException as error:
+                st.error(f"API request failed: {error}")
+
+            except (KeyError, IndexError, ValueError):
+                st.error("Unable to read the API response.")
+```
+
+**Configure your API key in PowerShell:**
+
+```powershell
+$env:OPENAI_API_KEY="your_actual_api_key"
+```
+
+Replace `your_actual_api_key` with your own API key. Keep it private and do not share it or upload it to GitHub.
+
+**Run the application:**
+
+```bash
+streamlit run insta_caption_generator.py
+```
+
+The app will open in your browser, usually at `http://localhost:8501`.
+
+**Example Output:**
+
+Input: `A beautiful sunset at the beach`
+
+Generated caption (example):
+
+"Chasing sunsets and collecting golden memories! 🌅🌊 #SunsetVibes #BeachLife"
+
+*The generated caption may vary. API access, an available model, and sufficient API credits or billing access may be required.*
+
+### Task 5: Display the Last 3 AI-Generated Captions as Chat Bubbles
+
+Replace the code in `insta_caption_generator.py` with the following version. It retains the API integration and adds chat history, showing the three most recent user descriptions and their AI-generated captions.
+
+```python
+import os
+import requests
+import streamlit as st
+
+st.set_page_config(
+    page_title="Insta Caption Generator",
+    page_icon="📸"
+)
+
+st.title("Welcome to Insta Caption Generator!")
+st.write("Describe your photo and get an AI-generated caption.")
+
+API_KEY = os.getenv("OPENAI_API_KEY")
+
+# Store conversation history across Streamlit reruns
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
+
+# Input form
+with st.form("caption_form"):
+    description = st.text_input("Describe your photo")
+    submitted = st.form_submit_button("Generate Caption")
+
+if submitted:
+    if not description.strip():
+        st.warning("Please describe your photo first.")
+
+    elif not API_KEY:
+        st.error("Please configure your OPENAI_API_KEY.")
+
+    else:
+        try:
+            with st.spinner("Generating your caption..."):
+                response = requests.post(
+                    "https://api.openai.com/v1/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {API_KEY}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "model": "gpt-4o-mini",
+                        "messages": [
+                            {
+                                "role": "system",
+                                "content": (
+                                    "Generate one creative Instagram caption "
+                                    "with suitable emojis and hashtags."
+                                )
+                            },
+                            {
+                                "role": "user",
+                                "content": description
+                            }
+                        ],
+                        "max_tokens": 120
+                    },
+                    timeout=30
+                )
+
+                response.raise_for_status()
+                data = response.json()
+                caption = data["choices"][0]["message"]["content"]
+
+                # Save the latest conversation
+                st.session_state.chat_history.append({
+                    "description": description,
+                    "caption": caption
+                })
+
+                # Keep only the latest 3 conversations
+                st.session_state.chat_history = (
+                    st.session_state.chat_history[-3:]
+                )
+
+        except requests.RequestException as error:
+            st.error(f"API request failed: {error}")
+
+        except (KeyError, IndexError, ValueError):
+            st.error("Unable to read the API response.")
+
+# Display the latest 3 conversations as chat bubbles
+st.subheader("Recent Captions")
+
+for chat in st.session_state.chat_history:
+    with st.chat_message("user"):
+        st.write("Your Description:")
+        st.write(chat["description"])
+
+    with st.chat_message("assistant"):
+        st.write("AI-Generated Caption:")
+        st.write(chat["caption"])
+```
+
+**Example Output:**
+
+- **You:** A beautiful sunset at the beach.
+- **AI:** Chasing sunsets and collecting golden memories! 🌅
+
+- **You:** My coffee and laptop setup.
+- **AI:** Coffee, creativity, and a little productivity magic! ☕💻
+
+- **You:** Friends enjoying a cricket match.
+- **AI:** Good friends, great cricket, unforgettable moments! 🏏
+
+*These are illustrative examples; the actual AI responses will differ.*
+
+### Conclusion
+
+In this project, I created a Streamlit application that accepts a photo description and generates an Instagram caption using an AI API. I also added session state to store conversation history and display the last three descriptions and generated captions as chat bubbles.

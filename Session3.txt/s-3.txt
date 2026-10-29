@@ -1,0 +1,104 @@
+# SESSION 3 – Open vs Closed Source Models + Ollama
+
+## Task 1: Three Open Source and Three Closed Source LLMs
+
+### A. Open Source / Open-Weight Models
+
+| Model Name | Organization | App or Service That Could Benefit |
+|---|---|---|
+| Llama 2 | Meta | WhatsApp could use it for a customer-support chatbot. |
+| Falcon | Technology Innovation Institute (TII) | Zomato could use it for food recommendations. |
+| Mistral | Mistral AI | Instagram could use it for content suggestions. |
+
+### B. Closed Source Models
+
+| Model Name | Organization | App or Service That Could Benefit |
+|---|---|---|
+| GPT-4 | OpenAI | WhatsApp could use it for intelligent reply suggestions. |
+| Gemini | Google | Zomato could use it for personalized food recommendations. |
+| Claude | Anthropic | Instagram could use it to help create captions and descriptions. |
+
+## Task 2: Comparison Between Open and Closed Source AI Models
+
+| Comparison Point | Open Source / Open-Weight Models | Closed Source Models |
+|---|---|---|
+| Cost | Many models can be downloaded and run locally, but hardware and maintenance cost money. Example: Llama 2. | Often accessed through paid APIs or subscriptions. Example: GPT-4. |
+| Customization | Usually allows more control over deployment and, depending on the license, fine-tuning. Example: Falcon. | Customization is generally limited to the provider's available tools and API. Example: Gemini. |
+| Community Support | Often benefits from public developer communities and shared tools. Example: Llama 2. | Primarily supported through the provider's documentation and support channels. Example: GPT-4. |
+| Data Privacy | Local deployment can help keep data on your own system, if configured correctly. Example: Llama 2. | Data is processed according to the provider's service and privacy policies. Example: Claude. |
+| Update Frequency | Updates depend on the model developers and community. Users may choose when to update. | The provider manages model updates and availability. Example: Gemini. |
+
+**Note:** Open-weight does not always mean fully open source. Model licenses and usage restrictions differ. Privacy also depends on how the model is deployed and configured.
+
+## Task 3: Install Ollama and Run Llama 2 Locally
+
+### Step 1: Install Ollama
+
+Download Ollama for Windows from its official website:
+
+https://ollama.com/download
+
+Install it and open PowerShell or Command Prompt.
+
+### Step 2: Download and Run Llama 2
+
+Run the following command:
+
+```bash
+ollama run llama2
+```
+
+This command downloads the Llama 2 model if it is not already available and starts an interactive chat session.
+
+### Step 3: Example Output
+
+```text
+PS C:\Users\YourName> ollama run llama2
+
+pulling manifest
+pulling model layers...
+verifying sha256 digest
+success
+
+>>> Send a message (/? for help)
+```
+
+**Observation:**
+
+Ollama downloads the required Llama 2 model files and starts the model on the local computer. After the model starts, I can enter questions in the terminal and receive AI-generated responses.
+
+*Note: The displayed output is an illustrative example. The actual output and progress messages may differ on your system.*
+
+## Task 4: Suggest Five AI Features for a Food Delivery App Like Zomato
+
+### Step 1: Run the Model
+
+Open PowerShell and execute:
+
+```bash
+ollama run llama2
+```
+
+### Step 2: Enter the Following Prompt
+
+```text
+Suggest 5 new features for a food delivery app like Zomato that use AI.
+```
+
+### Step 3: Example Response
+
+1. **Personalized Food Recommendations:** AI suggests dishes based on the user's food preferences, order history, and budget.
+2. **AI Food Assistant:** A chatbot helps users choose meals according to their taste, dietary preferences, and budget.
+3. **Delivery Time Prediction:** AI estimates delivery times using traffic, weather, restaurant preparation time, and rider availability.
+4. **Smart Review Summarization:** AI summarizes customer reviews to highlight the most important advantages and disadvantages of a restaurant.
+5. **Food Image Recognition:** AI identifies dishes from food images and recommends similar items available for ordering.
+
+*Note: This is a sample response. Your local Llama 2 model may generate different suggestions.*
+
+### My Favorite Idea: Personalized Food Recommendations
+
+I find personalized food recommendations the most interesting because they can help users discover dishes according to their tastes and budget. For example, if a user frequently orders spicy vegetarian food, the AI can recommend similar dishes from nearby restaurants. This can save time and improve the overall customer experience.
+
+## Conclusion
+
+Open-weight and closed-source LLMs both have important uses in modern applications. Open-weight models can provide more control over local deployment, while closed-source models often provide convenient access through hosted services and APIs. Ollama makes it possible to download and run supported LLMs locally and interact with them through a terminal.

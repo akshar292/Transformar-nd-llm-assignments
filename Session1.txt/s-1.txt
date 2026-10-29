@@ -1,0 +1,46 @@
+# SESSION 1 – OVERVIEW OF LLMs
+
+## Task 1: Three Popular Large Language Models (LLMs)
+
+| LLM Name | Company/Organization | Real-World Use Case |
+|---|---|---|
+| ChatGPT | OpenAI | Content writing, answering questions, and coding help. |
+| Gemini | Google | Research, summarizing information, and daily assistance. |
+| Claude | Anthropic | Writing documents, analyzing text, and coding assistance. |
+
+## Task 2: How Does an LLM Generate a Reply?
+
+An LLM like ChatGPT processes the question entered by the user and identifies its context and meaning. It breaks the input into smaller units called tokens. The model uses patterns learned during training to predict the most suitable next token. It generates one token at a time until a complete response is produced. Finally, the response is displayed to the user in a readable format.
+
+## Task 3: Traditional Rule-Based Chatbot vs Modern LLM-Powered Chatbot
+
+| Comparison Point | Traditional Rule-Based Chatbot | Modern LLM-Powered Chatbot |
+|---|---|---|
+| Query Handling | Follows predefined rules and keywords. | Understands a wide variety of questions. |
+| Language Flexibility | Supports limited phrases and patterns. | Understands and generates natural language. |
+| Learning Capability | Requires manual updates to change its rules. | Uses patterns learned during training. |
+| Response Generation | Provides predefined answers. | Generates responses based on user input. |
+| Complex Questions | Struggles with unexpected questions. | Can often handle complex questions. |
+| Example | Traditional railway help chatbot. | ChatGPT or Google Gemini. |
+
+## Task 4: How Can an LLM Improve Zomato?
+
+An LLM could improve the user experience in Zomato by acting as a smart food recommendation assistant. Users could ask questions such as, "Suggest spicy vegetarian food under ₹200 near me." The LLM could understand their preferences and recommend suitable dishes from available restaurants. It could also summarize customer reviews and help users choose the best restaurant.
+
+## Task 5: Advantages and Limitations of LLMs in Business Applications
+
+### A. Two Advantages
+
+1. **Automation and Efficiency:** LLMs can automate tasks such as answering customer questions, writing emails, and summarizing documents. This saves time and improves productivity.
+
+2. **Creativity and Flexibility:** LLMs can generate ideas, create content, and help businesses communicate with customers naturally.
+
+### B. Two Limitations
+
+1. **Accuracy Issues:** LLMs can sometimes generate incorrect or misleading information. Important information should be verified.
+
+2. **Cost and Bias:** Developing and maintaining LLM systems can be expensive. LLMs may also produce biased responses based on patterns in their training data.
+
+### C. My Opinion
+
+I agree that LLMs can sometimes generate incorrect information. Although they are useful for saving time and automating tasks, they are not always accurate. For example, an LLM might provide incorrect information about a company's products or policies. Therefore, businesses should verify important responses before using them.

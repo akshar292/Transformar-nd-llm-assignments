@@ -1,0 +1,286 @@
+## Task 1: Build a Simple PDF Chatbot
+
+**Objective:** Upload a PDF file, extract its text using PyPDF2, and display the extracted text in a web browser.
+
+### Step 1: Install Required Libraries
+
+```bash
+pip install streamlit PyPDF2
+```
+
+### Step 2: Python Code
+
+Create a file named `pdf_chatbot.py`.
+
+```python
+import streamlit as st
+from PyPDF2 import PdfReader
+
+st.title("Simple PDF Chatbot")
+st.write("Upload a PDF file to extract its text.")
+
+uploaded_file = st.file_uploader(
+    "Choose a PDF file",
+    type=["pdf"]
+)
+
+if uploaded_file is not None:
+    reader = PdfReader(uploaded_file)
+    extracted_text = ""
+
+    for page in reader.pages:
+        extracted_text += page.extract_text() or ""
+
+    st.subheader("Extracted PDF Text")
+    st.text_area(
+        "PDF Content",
+        extracted_text,
+        height=400
+    )
+
+    if not extracted_text.strip():
+        st.warning(
+            "No readable text found. The PDF may contain scanned images."
+        )
+```
+
+### Step 3: Run the Application
+
+```bash
+streamlit run pdf_chatbot.py
+```
+
+**Expected Result:** The application displays a PDF upload option. After uploading a PDF, its extracted text appears in a text area in the browser.
+
+**Explanation:** PyPDF2 reads the pages of the uploaded PDF and extracts available text. Streamlit displays the extracted content on the webpage.
+
+## Task 2: Customer Support Chatbot Using Python
+
+**Objective:** Create a chatbot that responds to order status, refund requests, and delivery delays using if-else statements.
+
+### Python Code
+
+Create a file named `customer_support_chatbot.py`.
+
+```python
+print("Welcome to Food Delivery Customer Support!")
+print("Available options:")
+print("1. Order Status")
+print("2. Refund Request")
+print("3. Delivery Delay")
+
+choice = input("Enter your query: ").lower().strip()
+
+if "order" in choice or "status" in choice:
+    print("Bot: Your order is being processed.")
+    print("Please check the app for the latest order status.")
+
+elif "refund" in choice:
+    print("Bot: Your refund request has been received.")
+    print("Please contact support with your order ID.")
+
+elif "delay" in choice or "late" in choice:
+    print("Bot: Sorry for the delivery delay.")
+    print("Please check the app for the updated delivery time.")
+
+else:
+    print("Bot: Sorry, I could not understand your query.")
+    print("Please ask about order status, refund, or delivery delay.")
+```
+
+### Example Output
+
+```text
+Welcome to Food Delivery Customer Support!
+Available options:
+1. Order Status
+2. Refund Request
+3. Delivery Delay
+
+Enter your query: refund
+
+Bot: Your refund request has been received.
+Please contact support with your order ID.
+```
+
+**Explanation:** The chatbot checks the user's input using if-else conditions. It provides a predefined response based on the keywords in the query.
+
+## Task 3: AI Content Generator Using OpenAI GPT API
+
+**Objective:** Create a Python function that accepts a topic and generates a short blog post using AI.
+
+**Note:** The older `openai.Completion.create()` method is deprecated for modern GPT chat models. The following example uses the current chat-completions API.
+
+### Step 1: Install the Required Libraries
+
+```bash
+pip install openai
+```
+
+### Step 2: Configure the API Key
+
+In PowerShell, run:
+
+```powershell
+$env:OPENAI_API_KEY="your_actual_api_key"
+```
+
+Replace the example text with your own API key.
+
+### Step 3: Python Code
+
+Create a file named `ai_content_generator.py`.
+
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
+
+def generate_blog(topic):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a helpful blog writer. "
+                    "Write short, engaging and informative blog posts."
+                )
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Write a short blog post about {topic}. "
+                    "Include an attractive title and useful information."
+                )
+            }
+        ],
+        max_tokens=100
+    )
+
+    return response.choices[0].message.content
+
+topic = input("Enter a blog topic: ")
+blog = generate_blog(topic)
+
+print("\nGenerated Blog Post:")
+print(blog)
+```
+
+### Example Input
+
+```text
+Enter a blog topic: Best Cafes in Ahmedabad
+```
+
+### Example Output
+
+```text
+Best Cafes in Ahmedabad
+
+Ahmedabad offers a variety of cafes for coffee lovers
+and food enthusiasts. From cozy coffee shops to modern
+cafes, visitors can enjoy delicious snacks, refreshing
+drinks, and comfortable spaces to relax or work.
+```
+
+*The output shown is illustrative; the actual result depends on the model.*
+
+**Explanation:** The `generate_blog()` function accepts a topic, sends it to the GPT API, and returns the generated blog content. The `max_tokens=100` setting limits the response length.
+
+## Task 4: Three Real-World Uses of LLMs in Indian Companies
+
+| Company | AI Use Case | Business Value |
+|---|---|---|
+| Air India | AI.g, a generative AI-powered customer service assistant. | Helps answer customer questions quickly and reduces the workload on human support agents. <Cite refs={["turn365937search0","turn365937search1"]}/> |
+| ClearTax | Generative AI for tax-related assistance, including a WhatsApp-based tax-filing application. | Makes tax-filing support more accessible and helps users navigate complex processes. <Cite refs={["turn365937search4"]}/> |
+| Tata Digital | AI-powered customer service through Freddy AI Agent and related support tools for Tata Neu. | Automates routine support queries so human agents can focus on more complex customer issues. <Cite refs={["turn365937search10"]}/> |
+
+**Explanation:** These examples show how businesses can use generative AI to improve customer service, simplify complex tasks, and increase operational efficiency.
+
+## Task 5: Improve the AI Content Generator
+
+### A. Ask ChatGPT for Suggestions
+
+**Prompt used:**
+
+"How can I make my GPT-based content generator more engaging for users?"
+
+**Suggested Improvements:**
+
+1. Allow users to select a writing tone, such as professional, friendly, or humorous.
+2. Generate an attractive title for each blog post.
+3. Ask the user for a target audience and preferred content length.
+4. Include a clear structure with an introduction, main points, and conclusion.
+
+### B. Implement One Improvement: User-Selected Writing Tone
+
+The following code extends Task 3 by allowing the user to choose a tone for the generated blog post.
+
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
+
+def generate_blog(topic, tone):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are an expert blog writer. "
+                    "Write engaging, clear and useful content."
+                )
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Write a short blog post about '{topic}'. "
+                    f"Use a {tone} tone. Include a catchy title "
+                    "and a short introduction."
+                )
+            }
+        ],
+        max_tokens=150
+    )
+
+    return response.choices[0].message.content
+
+topic = input("Enter a blog topic: ")
+
+print("Choose a tone: professional, friendly, or humorous")
+tone = input("Enter your preferred tone: ").strip().lower()
+
+allowed_tones = ["professional", "friendly", "humorous"]
+
+if tone not in allowed_tones:
+    print("Invalid tone. Using friendly tone.")
+    tone = "friendly"
+
+blog = generate_blog(topic, tone)
+
+print("\nGenerated Blog Post:")
+print(blog)
+```
+
+### Example Input
+
+```text
+Enter a blog topic: Best Cafes in Ahmedabad
+Enter your preferred tone: friendly
+```
+
+### Explanation
+
+I improved the AI Content Generator by adding a tone-selection feature. Users can choose a professional, friendly, or humorous writing style. This makes the application more flexible and allows users to generate content that better matches their needs.
+
+## Conclusion
+
+In this session, I developed a PDF text extractor, a rule-based customer support chatbot, and an AI-powered blog generator. I also explored real-world applications of LLMs in Indian businesses and improved my content generator by adding a user-selected writing tone.
